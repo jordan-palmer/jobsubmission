@@ -8,3 +8,4 @@ Python scripts
 - function that produces new directories
 - clean up function that removes all new .sh and .C files in the case of a break
 - Make it so someone can run an executable command with different sets of arguments in one go
+- Make new dir for macros, .sh scripts etc
