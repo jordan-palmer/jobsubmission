@@ -11,12 +11,13 @@ class jobSubmitter(object):
         self.jobName = jobName
         self.inFile = inFile
 
-    def searRep(self, ToReplace, Replacement):
+    def searRep(self, ToReplace, Replacement, filetoedit):
         #temp1 = str(random_with_N_digits(3))                            
         os.chdir(self.workDir)
         ToReplace = str(ToReplace)
         Replacement = str(Replacement)
-        temp = str((self.inFile).replace(".mac","2.mac"))
+#        it = str(filetoedit.replace(".*
+        temp = str(filetoedit.replace(".mac","2.mac"))
         f1 = open(self.inFile, 'r')
         f2 = open(temp, 'w')
         for line in f1:
