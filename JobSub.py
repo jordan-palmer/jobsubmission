@@ -18,7 +18,11 @@ class jobSubmitter(object):
         #sub.call(["mkdir",self.jobDir])
         if not os.path.exists(self.jobDir):
             os.makedirs(self.jobDir)
-        self.jobScript = self.jobDir + "/" + self.jobName + ".sh"
+        shScript = "/shellScripts"
+        if not os.path.exists(self.jobDir + shScript):
+            os.makedirs(self.jobDir + shScript)
+
+        self.jobScript = self.jobDir + shScript + "/" + self.jobName + ".sh"
         
     
     def writeJobBash(self):
