@@ -10,7 +10,16 @@ myfile = "LEDTEST.mac"
 errorfile = "errfile.txt"
 logfile ="logfile.txt"
 
-x = jobSubmitter(source,workdir,command,"PythonTEST",myfile)
-jobSubmitter.writeJobBash(x)
-jobSubmitter.jobSubmit(x,errorfile,logfile)
+# x = jobSubmitter(source,workdir,command,"PythonTEST",myfile)
+# jobSubmitter.writeJobBash(x)
+# jobSubmitter.jobSubmit(x,errorfile,logfile)
 #jobSubmitter.searRep(x,"test","message")
+
+source1 = "/scratch1/darkmatter/ds20k/g4ds10_reBuild_1218/configDarkSide.sh"
+wkDir = "/scratch1/darkmatter/ds20k/g4ds10_reBuild_1218/Linux-g++"
+cmd = "g4ds"
+myfile1 = "run.mac"
+
+y = jobSubmitter(source1,wkDir,cmd,"TestJob5", myfile1)
+jobSubmitter.writeJobBash(y)
+jobSubmitter.jobSubmit(y,errorfile,logfile) 
