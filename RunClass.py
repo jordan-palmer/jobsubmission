@@ -11,15 +11,19 @@ myfile = "LEDTEST.mac"
 errorfile = "errfile.txt"
 logfile ="logfile.txt"
 shellname = "LEDTEST"
-
-x = jobSubmitter(source,workdir,command,"PythonTEST",myfile)
+jobdirname = "PythonTEST"
+#x = jobSubmitter(source,workdir,command,"PythonTEST",myfile)
 #jobSubmitter.writeJobBash(x)
 #jobSubmitter.jobSubmit(x,errorfile,logfile)
 for i in range(2,5,1):
+    x = jobSubmitter(source,workdir,command,jobdirname,jobdirname+str(i),myfile)
     y = jobSubmitter.searchReplace(x,"/Bacc/source/set LEDPhotons TPCtop 1 1000","/Bacc/source/set LEDPhotons TPCtop "+str(i)+ " 1000",myfile,str(i))
     shellname = shellname + str(i)
-    jobSubmitter.writeJobBash(x,shellname,y)
+    jobSubmitter.writeJobBash(x,y)
+  
+    
     shellname = "LEDTEST"
+    
 #source1 = "/scratch1/darkmatter/ds20k/g4ds10_reBuild_1218/configDarkSide.sh"
 #wkDir = "/scratch1/darkmatter/ds20k/g4ds10_reBuild_1218/Linux-g++"
 #cmd = "g4ds"
