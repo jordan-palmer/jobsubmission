@@ -1,2 +1,0 @@
-configuring environment for a node006.beowulf.cluster
-sourced config
