@@ -11,21 +11,16 @@ class jobSubmitter(object):
         self.jobName = jobName
         self.inFile = inFile
 
-        #set up file system - by default all in-files in relation to workDir and all outputs placed into newly created directory  
         self.jobDir = self.workDir + "/" + self.jobName #jobDir = new directory for output
         sub.call(["echo", self.jobDir])
-        #os.chdir(self.workDir)
-        #sub.call(["mkdir",self.jobDir])
-        #os.makedirs(self.jobDir)
+
         if not os.path.exists(self.jobDir):
             os.makedirs(self.jobDir)
         shScript = "/shellScripts"
         if not os.path.exists(self.jobDir + shScript):
             os.makedirs(self.jobDir + shScript)
 
-        #sub.call(["echo",self.jobDir])
         self.jobScript = self.jobDir + shScript + "/" + self.jobName + ".sh"
-        #sub.call(["echo",self.jobScript])
     
     def writeJobBash(self):
         #Function that writes a shell script to a file which will be qsubbed 
