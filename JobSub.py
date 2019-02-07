@@ -39,10 +39,10 @@ class jobSubmitter(object):
         f.write('%s\n%s\n%s\n%s\n%s\n'%(line1,line2,line3,line4,line5))
 
 
-    def jobSubmit(self,err_file, log_file):
+    def jobSubmit(self,err_file, log_file, length, memory):
         #Function to qsub jobs 
         os.system("chmod +x" + " " + self.jobName)
-        sub.call(["qsub","-q","long","-l","pvmem=8gb","-o",log_file,"-e",err_file, self.jobScript])
+        sub.call(["qsub","-q",length,"-l","pvmem="+memory,"-o",log_file,"-e",err_file, self.jobScript])
         #sub.call(["./"+jobName])
 
     def jobCleanUp():
