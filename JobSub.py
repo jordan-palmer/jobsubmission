@@ -51,41 +51,39 @@ class jobSubmitter(object):
         print "workDir " + self.workDir 
         print "jobDirName:  " + self.jobDirName
         print "----------------------------------------------------"
+
     def writeJobBash(self):
         #Function that writes a shell script to a file which will be qsubbed 
         f = open(self.jobScript,"w+")
+        MainString = "#!/bin/bash \n echo \"PBS Job ID  = \"$PBS_JOBID \n source {} \n echo sourced config \n JOBDIR=/data/$USER/job_$PBS_JOBID \n mkdir -p $JOBDIR \n cd $JOBDIR \n echo This is the directory = $PWD \n trap \"cp $JOBDIR/* {}/. ; rm -rf $JOBDIR; exit;\" SIGTERM SIGINT SIGHUP \n {} {} \n echo \"job finished\" \n date \n echo we are in = $PWD \n cp -r $JOBDIR/* {}/ \n if [ $? != 0 ]; then \n \techo \"copy failed\" \n \texit 1 \n fi \n rm -rf $JOBDIR \n if [ $? == 0 ]; then \n \t echo \"tidied up files on node\" \n fi" 
+        f.write(MainString.format(self.source,self.jobDirName,self.cmd,self.inFile,self.jobDirName ))
         
-        
-        
-
 # prepare cleanup trap
-        
-
-
-        line1 = "#!/bin/bash"
-        line2 =  "echo \"PBS Job ID  = \"$PBS_JOBID"
-        line3 = "source" + " " + self.source              #"cd" + " " + self.workDir
-        line4 = "echo sourced config"
-        line5 = "JOBDIR=/data/$USER/job_$PBS_JOBID"
-        line6 = "mkdir -p $JOBDIR"
-        line7 = "cd $JOBDIR"
-        line8 = "trap \"cp $JOBDIR/* " + self.jobDirName + "/. ; rm -rf $JOBDIR; exit;\" SIGTERM SIGINT SIGHUP"
-        line9 =  self.workDir+"/" + self.cmd + " " + self.inFile
-        line10 = "echo \"job finished\""
-        line11 = "date"
-        line12 = "cp $JOBDIR/* " + self.jobDirName + "/."
-        line13 = "if [ $? != 0 ]; then"
-        line14 = "\techo \"copy failed\""
-        line15 = "\texit 1"
-        line16 = "fi"
+#        f.write("{}".format("#!/bin/bash \n echo \"PBS Job ID  = \"$PBS_JOBID \n"))
+#        line1 = "#!/bin/bash"
+#        line2 =  "echo \"PBS Job ID  = \"$PBS_JOBID"
+#        line3 = "source" + " " + self.source              #"cd" + " " + self.workDir
+#        line4 = "echo sourced config"
+#        line5 = "JOBDIR=/data/$USER/job_$PBS_JOBID"
+#        line6 = "mkdir -p $JOBDIR"
+#        line7 = "cd $JOBDIR"
+#        line8 = "trap \"cp $JOBDIR/* " + self.jobDirName + "/. ; rm -rf $JOBDIR; exit;\" SIGTERM SIGINT SIGHUP"
+#        line9 =  self.cmd + " " + self.inFile
+#        line10 = "echo \"job finished\""
+#        line11 = "date"
+#        line12 = "cp $JOBDIR/* " + self.jobDirName + "/."
+#        line13 = "if [ $? != 0 ]; then"
+#        line14 = "\techo \"copy failed\""
+#        line15 = "\texit 1"
+#        line16 = "fi"
         # clean up temporary files
-        line17 = "rm -rf $JOBDIR"
-        line18 = "if [ $? == 0 ]; then"
-        line19 = "\t echo \"tidied up files on node\""
-        line20 = "fi"
+#        line17 = "rm -rf $JOBDIR"
+#        line18 = "if [ $? == 0 ]; then"
+#        line19 = "\t echo \"tidied up files on node\""
+#        line20 = "fi"
 
         #This line writes the lines in a column 
-        f.write('%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n'%(line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15,line16,line17,line18,line19,line20))
+#        f.write('%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n'%(line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,line11,line12,line13,line14,line15,line16,line17,line18,line19,line20))
 
 
     def jobSubmit(self,err_file = None ,log_file = None, queue = "medium", memory = "4GB", shellScript = None):
