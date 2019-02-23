@@ -55,7 +55,7 @@ class jobSubmitter(object):
     def writeJobBash(self):
         #Function that writes a shell script to a file which will be qsubbed 
         f = open(self.jobScript,"w+")
-        MainString = "#!/bin/bash \n echo \"PBS Job ID  = \"$PBS_JOBID \n source {} \n echo sourced config \n JOBDIR=/data/$USER/job_$PBS_JOBID \n mkdir -p $JOBDIR \n cd $JOBDIR \n echo This is the directory = $PWD \n trap \"cp $JOBDIR/* {}/. ; rm -rf $JOBDIR; exit;\" SIGTERM SIGINT SIGHUP \n {} {} \n echo \"job finished\" \n date \n echo we are in = $PWD \n cp -r $JOBDIR/* {}/ \n if [ $? != 0 ]; then \n \techo \"copy failed\" \n \texit 1 \n fi \n rm -rf $JOBDIR \n if [ $? == 0 ]; then \n \t echo \"tidied up files on node\" \n fi" 
+        MainString = "#!/bin/bash \n echo \"PBS Job ID  = \"$PBS_JOBID \n source {0} \n echo sourced config \n JOBDIR=/data/$USER/job_$PBS_JOBID \n mkdir -p $JOBDIR \n cd $JOBDIR \n echo This is the directory = $PWD \n trap \"cp $JOBDIR/* {1}/. ; rm -rf $JOBDIR; exit;\" SIGTERM SIGINT SIGHUP \n {2} {3} \n echo \"job finished\" \n date \n echo we are in = $PWD \n cp -r $JOBDIR/* {4}/ \n if [ $? != 0 ]; then \n \techo \"copy failed\" \n \texit 1 \n fi \n rm -rf $JOBDIR \n if [ $? == 0 ]; then \n \t echo \"tidied up files on node\" \n fi" 
         f.write(MainString.format(self.source,self.jobDirName,self.cmd,self.inFile,self.jobDirName ))
         
 # prepare cleanup trap
