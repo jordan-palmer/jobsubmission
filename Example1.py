@@ -1,12 +1,12 @@
-#=====================================================================
-#Example 1                  -  Updated : Jordan Palmer : 24-02-19
-#=====================================================================
-#Simple job submission script example. 
-# 1. Creates an object of the class (x)
-# 2. Writes a shell script
-# 3. Submits job on the farm
-# Edit the variables below in the same format
-#=====================================================================
+#=====================================================================#
+#Example 1                  -  Updated : Jordan Palmer : 24-02-19     #
+#=====================================================================#
+#Simple job submission script example.                                #
+# 1. Creates an object of the class (x)                               #
+# 2. Writes a shell script                                            #
+# 3. Submits job on the farm                                          #
+# Edit the variables below in the same format                         #
+#=====================================================================#
 
 import jobsubmission.JobSub 
 from jobsubmission.JobSub import *
