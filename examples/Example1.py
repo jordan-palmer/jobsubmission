@@ -8,8 +8,8 @@
 # Edit the variables below in the same format                         #
 #=====================================================================#
 
-import jobsubmission.JobSub 
-from jobsubmission.JobSub import *
+import jobsubmission.JobSub as _job
+#from jobsubmission.JobSub import *
 
 source = "/scratch3/jpalmer/PhD/JP-LEDs2/BACCARAT/setup.sh" #Full path to environment you would like to source 
 workdir = "/scratch3/jpalmer/PhD/JP-LEDs2/BACCARAT" #Working directory, where job directory will be created
@@ -19,10 +19,10 @@ errorfile = "errfile.txt" #Name of error file
 logfile = "logfile.txt" #name of log file
 
 # 1
-x = jobsubmission.jobSubmitter(source,"EXAMPLE1",  
-                               command, myfile, workdir)
+_self = _job.jobSubmitter(source,"EXAMPLE1",  
+                          command, myfile, workdir)
 # 2
-jobsubmission.jobSubmitter.writeJobBash(x)
+_self.jobSubmitter.writeJobBash() 
 # 3
-jobsubmission.jobSubmitter.jobSubmit(x, errorfile, 
-                                     logfile,"medium","4gb")
+_self.jobSubmit(x, errorfile,
+                logfile,"medium","4gb")

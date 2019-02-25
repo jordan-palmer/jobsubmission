@@ -38,7 +38,6 @@ class jobSubmitter(object):
         inputfiles = "/inputFiles"
         if not os.path.exists(self.jobDirName+inputfiles):
             os.makedirs(self.jobDirName+inputfiles)
-        self.inputFilesDir = self.jobDirName+inputfiles
         eoFiles = "/eoFiles"
         if not os.path.exists(self.jobDirName+eoFiles):
             os.makedirs(self.jobDirName+eoFiles)
