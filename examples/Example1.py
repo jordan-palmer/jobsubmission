@@ -24,5 +24,5 @@ _self = _job.jobSubmitter(source,"EXAMPLE1",
 # 2
 _self.jobSubmitter.writeJobBash() 
 # 3
-_self.jobSubmit(x, errorfile,
+_self.jobSubmit(errorfile,
                 logfile,"medium","4gb")
