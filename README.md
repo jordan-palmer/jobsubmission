@@ -21,3 +21,7 @@ Python scripts
 5. to make an object of the jobSubmitter class, now do:
     x = jobsubmission.jobSubmitter(par1,par2,....)
     
+Documentation:
+
+http://www.pp.rhul.ac.uk/~jpalmer/jobsubmissions/index.html
+
